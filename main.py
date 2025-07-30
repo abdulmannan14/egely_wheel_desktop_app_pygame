@@ -304,7 +304,9 @@ class EgelyApp:
                 self.button_rect.center = (self.window_size[0] // 2, int(self.window_size[1] * 0.85))
                 self.close_button_rect.center = (self.window_size[0] // 2, (self.window_size[1] // 2) + 180)
             elif event.type == pygame.KEYDOWN:
-                if self.state == STATE_STARTUP and event.key == pygame.K_SPACE:
+                if event.key == pygame.K_ESCAPE:
+                    self.running = False
+                elif self.state == STATE_STARTUP and event.key == pygame.K_SPACE:
                     self.start_instruction_phase()
                 elif self.state == STATE_INSTRUCTION and event.key == pygame.K_SPACE:
                     if self.timer > 10:
@@ -314,8 +316,6 @@ class EgelyApp:
                 elif self.state == STATE_END:
                     if event.key == pygame.K_RETURN:
                         self.reset_game()
-                    elif event.key == pygame.K_ESCAPE:
-                        self.running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.state == STATE_STARTUP and self.button_rect.collidepoint(event.pos):
                     self.start_instruction_phase()
